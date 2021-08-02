@@ -7,6 +7,7 @@ function main() {
  div.appendChild(canvas);
  alert("javascript done");
 }
+
 /*
  * create new "canvas" element in document
  * @returns canvas
@@ -15,3 +16,5 @@ function createCanvasElement() {
  let element = document.createElement("canvas");
  return element;
 }
+
+main();
