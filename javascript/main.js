@@ -2,6 +2,7 @@
  * do this first
  */
 function main() {
+ alert("javascript start");
  let div = document.getElementById("div");
  let canvasElement = createCanvasElement();
  div.appendChild(canvas);
