@@ -3,9 +3,13 @@
  */
 function main() {
  alert("javascript start");
- let div = document.getElementById("div");
- let canvasElement = createCanvasElement();
- div.appendChild(canvas);
+ try {
+  let div = document.getElementById("div");
+  let canvasElement = createCanvasElement();
+  div.appendChild(canvas);
+ } catch (error) {
+  alert(error);
+ }
  alert("javascript done");
 }
 
