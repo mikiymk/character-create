@@ -5,7 +5,7 @@ function main() {
  alert("javascript start");
  try {
   let div = document.getElementById("div");
-  let canvasElement = createCanvasElement();
+  let canvas = createCanvasElement();
   div.appendChild(canvas);
  } catch (error) {
   alert(error);
