@@ -1,10 +1,12 @@
+const rootid = "div";
+
 /*
  * do this first
  */
 function main() {
  alert("javascript start");
  try {
-  let div = document.getElementById("div");
+  let div = document.getElementById(rootid);
   let canvas = createCanvasElement();
   div.appendChild(canvas);
  } catch (error) {
