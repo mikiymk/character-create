@@ -21,6 +21,8 @@ function main() {
  */
 function createCanvasElement() {
  let element = document.createElement("canvas");
+ element.setAttribute("height", 500);
+ element.setAttribute("width", 500);
  return element;
 }
 
