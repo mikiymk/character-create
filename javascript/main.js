@@ -3,20 +3,35 @@
  */
 export function main(root) {
   let canvas = createCanvasElement();
+  let controller = createControllerElement();
+
   root.appendChild(canvas);
+  root.appendChild(controller);
+
+  let context = canvas.getContext("2d");
 }
 
 /*
- * create new "canvas" element in document
- * @returns canvas
+ * Canvas要素を作ります
  */
 function createCanvasElement() {
   return h("canvas", { height: 500, width: 500 });
 }
 
 /*
+ * コントローラー要素を作ります
+ */
+function createCanvasElement() {
+  return h("div", {}, [t("コントローラー")]);
+}
+
+function debug(data) {
+  console.log(data);
+  alert(data);
+}
+
+/*
  * タグ名、属性、子要素でタグ要素を作ります。
- * @param tag {string} タグ名
  */
 function h(tag, attrs, children) {
   let element = document.createElement(tag);
