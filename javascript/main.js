@@ -23,7 +23,20 @@ function createCanvasElement() {
  * コントローラー要素を作ります
  */
 function createControllerElement() {
-  return h("div", {}, [t("コントローラー")]);
+  return h("div", {}, [
+    t("コントローラー"),
+    h("div", {}, [
+      h("h2", {}, [t("顔の位置")]),
+      h("div", {}, [
+        h("h3", {}, [t("縦")]),
+        h("input", { type: "range" }),
+      ]),
+      h("div", {}, [
+        h("h3", {}, [t("横")]),
+        h("input", { type: "range" }),
+      ]),
+    ]),
+  ]);
 }
 
 /**
