@@ -42,14 +42,14 @@ function drawingFace(context) {
   context.beginPath();
   context.fillStyle = "#000";
   context.moveTo(50, 50);
-  context.ellipse(65, 50, 5, 10, 0, 2 * Math.PI);
+  context.ellipse(65, 50, 5, 10, 0, 0, 2 * Math.PI);
   context.fill();
 
   // 左目
   context.beginPath();
   context.fillStyle = "#000";
   context.moveTo(50, 50);
-  context.ellipse(85, 50, 5, 10, 0, 2 * Math.PI);
+  context.ellipse(85, 50, 5, 10, 0, 0, 2 * Math.PI);
   context.fill();
 }
 
