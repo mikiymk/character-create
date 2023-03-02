@@ -9,11 +9,13 @@
 
 <body>
     <h1>Github Pages Test</h1>
-    <div id="div"></div>
+    <div id="root"></div>
     <script type="module" src="./javascript/main.js"></script>
     <script type="module">
         try {
-            main(document.getElementById("div"));
+            alert("start");
+            main(document.getElementById("root"));
+            alert("done");
         } catch (error) {
             alert(error);
         }
