@@ -1,18 +1,9 @@
-const rootid = "div";
-
 /*
  * do this first
  */
-function main() {
-    alert("javascript start");
-    try {
-        let div = document.getElementById(rootid);
-        let canvas = createCanvasElement();
-        div.appendChild(canvas);
-    } catch (error) {
-        alert(error);
-    }
-    alert("javascript done");
+export function main(root) {
+    let canvas = createCanvasElement();
+    root.appendChild(canvas);
 }
 
 /*
@@ -25,5 +16,3 @@ function createCanvasElement() {
     element.setAttribute("width", 500);
     return element;
 }
-
-main();
