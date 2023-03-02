@@ -1,4 +1,4 @@
-/*
+/**
  * do this first
  */
 export function main(root) {
@@ -9,20 +9,34 @@ export function main(root) {
   root.appendChild(controller);
 
   let context = canvas.getContext("2d");
+  drawingFace(context);
 }
 
-/*
+/**
  * Canvas要素を作ります
  */
 function createCanvasElement() {
   return h("canvas", { height: 500, width: 500 });
 }
 
-/*
+/**
  * コントローラー要素を作ります
  */
 function createControllerElement() {
   return h("div", {}, [t("コントローラー")]);
+}
+
+/**
+ * 顔を描画します
+ * @param {CanvasRenderingContext2D} context
+ */
+function drawingFace(context) {
+  context.beginPath();
+  context.fillStyle = "#fff";
+  context.strokeStyle = "#000";
+  context.moveTo(50, 50);
+  context.arc(75, 50, 25, 0, 2 * Math.PI);
+  context.fill();
 }
 
 function debug(data) {
@@ -30,7 +44,7 @@ function debug(data) {
   alert(data);
 }
 
-/*
+/**
  * タグ名、属性、子要素でタグ要素を作ります。
  */
 function h(tag, attrs, children) {
@@ -47,7 +61,7 @@ function h(tag, attrs, children) {
   return element;
 }
 
-/*
+/**
  * テキスト要素を作ります。
  */
 function t(text) {
