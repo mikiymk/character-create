@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
     <meta charset="utf-8">
     <link href="./css/style.css" rel="stylesheet">
-    <title>Github Pages Test</title>
+    <title>Character Creator</title>
 </head>
 
 <body>
     <h1>Github Pages Test</h1>
     <div id="div"></div>
-    <script type="text/javascript" src="./javascript/main.js"></script>
+    <script type="module" src="./javascript/main.js"></script>
+    <script type="module">
+        try {
+            main(document.getElementById("div"));
+        } catch (error) {
+            alert(error);
+        }
+    </script>
 </body>
 
 </html>
