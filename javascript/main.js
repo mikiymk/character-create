@@ -21,7 +21,7 @@ function createCanvasElement() {
 /*
  * コントローラー要素を作ります
  */
-function createCanvasElement() {
+function createControllerElement() {
   return h("div", {}, [t("コントローラー")]);
 }
 
