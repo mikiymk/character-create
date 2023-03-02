@@ -10,8 +10,10 @@
 <body>
     <h1>Github Pages Test</h1>
     <div id="root"></div>
-    <script type="module" src="./javascript/main.js"></script>
+
     <script type="module">
+        import { main } from "./javascript/main.js";
+
         try {
             alert("start");
             main(document.getElementById("root"));
