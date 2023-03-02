@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * do this first
  */
@@ -21,19 +23,12 @@ function createCanvasElement() {
 
 const bodyObject = {
   face: {
-    x: 50,
-    y: 50,
+    x: 50, y: 50,
     eyes: {
-      left: {
-        x: 10,
-        y: 0,
-      },
-      right: {
-        x: -10,
-        y: 0,
-      }
-    }
-  }
+      left: { x: 10, y: 0, },
+      right: { x: -10, y: 0, },
+    },
+  },
 };
 
 /**
@@ -98,6 +93,35 @@ function drawingFace(context) {
 function debug(data) {
   console.log(data);
   alert(data);
+}
+
+/**
+ * 観察可能オブジェクトを作成します
+ * @template T
+ * @param {T} initial 
+ * @returns {{
+ *   value: () => T;
+ *   update: (newValue: T) => void;
+ *   subscribe: (fn: (value: T) => void) => void;
+ *   unsubscribe: (fn: (value: T) => void) => void;
+ * }}
+ */
+function observable(initial) {
+  let value = initial;
+  let subscribers = new Set;
+
+  return {
+    type: "observable",
+    value: () => value,
+    update: (newValue) => {
+      value = newValue;
+      for (let subscriber of subscribers) {
+        subscriber(value);
+      }
+    },
+    subscribe: (fn) => void subscribers.add(fn),
+    unsubscribe: (fn) => void subscribers.delete(fn),
+  };
 }
 
 /**
