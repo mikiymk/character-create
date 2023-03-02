@@ -19,6 +19,23 @@ function createCanvasElement() {
   return h("canvas", { height: 500, width: 500 });
 }
 
+const bodyObject = {
+  face: {
+    x: 50,
+    y: 50,
+    eyes: {
+      left: {
+        x: 10,
+        y: 0,
+      },
+      right: {
+        x: -10,
+        y: 0,
+      }
+    }
+  }
+};
+
 /**
  * コントローラー要素を作ります
  */
@@ -29,11 +46,23 @@ function createControllerElement() {
       h("h2", {}, [t("顔の位置")]),
       h("div", {}, [
         h("h3", {}, [t("縦")]),
-        h("input", { type: "range" }),
+        h("input", {
+          type: "range",
+          onchange: (event) => {
+            debug("change 縦");
+            bodyObject.face.x = event.target.value;
+          },
+        }),
       ]),
       h("div", {}, [
         h("h3", {}, [t("横")]),
-        h("input", { type: "range" }),
+        h("input", {
+          type: "range",
+          onchange: (event) => {
+            debug("change 横");
+            bodyObject.face.x = event.target.value;
+          },
+        }),
       ]),
     ]),
   ]);
@@ -73,12 +102,17 @@ function debug(data) {
 
 /**
  * タグ名、属性、子要素でタグ要素を作ります。
+ * @param {string} tag
  */
 function h(tag, attrs, children) {
   let element = document.createElement(tag);
 
   for (let attr in attrs || {}) {
-    element.setAttribute(attr, attrs[attr]);
+    if (attr.startsWith("on")) {
+      element.addEventListener(attr.slice(2).toLowerCase(), attrs[attr]);
+    } else {
+      element.setAttribute(attr, attrs[attr]);
+    }
   }
 
   for (let child of children || []) {
