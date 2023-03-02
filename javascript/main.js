@@ -31,11 +31,25 @@ function createControllerElement() {
  * @param {CanvasRenderingContext2D} context
  */
 function drawingFace(context) {
+  // 輪郭
   context.beginPath();
   context.fillStyle = "#fff";
-  context.strokeStyle = "#000";
   context.moveTo(50, 50);
   context.arc(75, 50, 25, 0, 2 * Math.PI);
+  context.fill();
+
+  // 右目
+  context.beginPath();
+  context.fillStyle = "#000";
+  context.moveTo(50, 50);
+  context.ellipse(65, 50, 5, 10, 0, 2 * Math.PI);
+  context.fill();
+
+  // 左目
+  context.beginPath();
+  context.fillStyle = "#000";
+  context.moveTo(50, 50);
+  context.ellipse(85, 50, 5, 10, 0, 2 * Math.PI);
   context.fill();
 }
 
