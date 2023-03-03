@@ -23,7 +23,7 @@ function createCanvasElement() {
 
 const bodyObject = {
   face: {
-    x: 50, y: 50,
+    pos: { x: observable(50), y: observable(50) },
     eyes: {
       left: { x: 10, y: 0, },
       right: { x: -10, y: 0, },
@@ -43,11 +43,12 @@ function createControllerElement() {
         h("h3", {}, [t("縦")]),
         h("input", {
           type: "range",
+          value: face.pos.x.value(),
           onchange: (event) => {
-            debug("change 縦");
-            bodyObject.face.x = event.target.value;
+            face.pos.x.update(event.target.value);
           },
         }),
+        t(face.pos.x),
       ]),
       h("div", {}, [
         h("h3", {}, [t("横")]),
@@ -150,5 +151,12 @@ function h(tag, attrs, children) {
  * テキスト要素を作ります。
  */
 function t(text) {
-  return document.createTextNode(text);
+  if (text.type === "observable") {
+    let element = document.createTextNode(text.value());
+    let onchange = (value) => void (element.data = value);
+    text.subscribe(onchange);
+    return element;
+  } else {
+    return document.createTextNode(text);
+  }
 }
