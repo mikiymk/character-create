@@ -11,7 +11,7 @@ export function main(root) {
   root.appendChild(controller);
 
   let context = canvas.getContext("2d");
-  drawingFace(context);
+  drawingAll(context);
 }
 
 /**
@@ -25,8 +25,8 @@ const bodyObject = {
   face: {
     pos: { x: observable(50), y: observable(50) },
     eyes: {
-      left: { x: 10, y: 0, },
-      right: { x: -10, y: 0, },
+      left: { x: 10, y: 0 },
+      right: { x: -10, y: 0 },
     },
   },
 };
@@ -65,29 +65,39 @@ function createControllerElement() {
 }
 
 /**
+ * 全体を描画します
+ * @param {CanvasRenderingContext2D} context
+ */
+function drawingAll(context) {
+  context.clearRect(0, 0, 500, 500);
+  drawingFace(context);
+
+  requestAnimationFrame(() => drawingAll(context));
+}
+
+/**
  * 顔を描画します
  * @param {CanvasRenderingContext2D} context
  */
 function drawingFace(context) {
   // 輪郭
-  context.beginPath();
-  context.fillStyle = "#fff";
-  context.moveTo(50, 50);
-  context.arc(75, 50, 25, 0, 2 * Math.PI);
-  context.fill();
+  drawingRound(context, 75, bodyObject.face.pos.x.value(), 25, 25, "#fff");
 
   // 右目
-  context.beginPath();
-  context.fillStyle = "#000";
-  context.moveTo(50, 50);
-  context.ellipse(65, 50, 5, 10, 0, 0, 2 * Math.PI);
-  context.fill();
+  drawingRound(context, 65, bodyObject.face.pos.x.value(), 5, 10, "#000");
 
   // 左目
+  drawingRound(context, 85, bodyObject.face.pos.x.value(), 5, 10, "#000");
+}
+
+/**
+ * 楕円を描画します
+ * @param {CanvasRenderingContext2D} context
+ */
+function drawingRound(context, x, y, rx, ry, color) {
   context.beginPath();
-  context.fillStyle = "#000";
-  context.moveTo(50, 50);
-  context.ellipse(85, 50, 5, 10, 0, 0, 2 * Math.PI);
+  context.fillStyle = color;
+  context.ellipse(x, y, rx, ry, 0, 0, 2 * Math.PI);
   context.fill();
 }
 
@@ -99,7 +109,7 @@ function debug(data) {
 /**
  * 観察可能オブジェクトを作成します
  * @template T
- * @param {T} initial 
+ * @param {T} initial
  * @returns {{
  *   value: () => T;
  *   update: (newValue: T) => void;
@@ -109,7 +119,7 @@ function debug(data) {
  */
 function observable(initial) {
   let value = initial;
-  let subscribers = new Set;
+  let subscribers = new Set();
 
   return {
     type: "observable",
