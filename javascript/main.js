@@ -43,12 +43,12 @@ function createControllerElement() {
         h("h3", {}, [t("縦")]),
         h("input", {
           type: "range",
-          value: face.pos.x.value(),
+          value: bodyObject.face.pos.x.value(),
           onchange: (event) => {
-            face.pos.x.update(event.target.value);
+            bodyObject.face.pos.x.update(event.target.value);
           },
         }),
-        t(face.pos.x),
+        t(bodyObject.face.pos.x),
       ]),
       h("div", {}, [
         h("h3", {}, [t("横")]),
