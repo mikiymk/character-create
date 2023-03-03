@@ -37,30 +37,23 @@ const bodyObject = {
 function createControllerElement() {
   return h("div", {}, [
     t("コントローラー"),
-    h("div", {}, [
-      h("h2", {}, [t("顔の位置")]),
-      h("div", {}, [
-        h("h3", {}, [t("縦")]),
-        h("input", {
-          type: "range",
-          value: bodyObject.face.pos.x.value(),
-          onchange: (event) => {
-            bodyObject.face.pos.x.update(event.target.value);
-          },
-        }),
-        t(bodyObject.face.pos.x),
-      ]),
-      h("div", {}, [
-        h("h3", {}, [t("横")]),
-        h("input", {
-          type: "range",
-          onchange: (event) => {
-            debug("change 横");
-            bodyObject.face.x = event.target.value;
-          },
-        }),
-      ]),
-    ]),
+    createNumberControlElement("顔の位置 縦", bodyObject.face.pos.x),
+    createNumberControlElement("顔の位置 横", bodyObject.face.pos.y),
+  ]);
+}
+
+/**
+ * 数字のコントローラー要素を作ります
+ */
+function createNumberControlElement(name, obs) {
+  return h("div", {}, [
+    h("h3", {}, [t(name)]),
+    h("input", {
+      type: "range",
+      value: obs.value(),
+      oninput: (event) => obs.update(event.target.value),
+    }),
+    t(obs),
   ]);
 }
 
@@ -80,14 +73,17 @@ function drawingAll(context) {
  * @param {CanvasRenderingContext2D} context
  */
 function drawingFace(context) {
+  let x = bodyObject.face.pos.x.value();
+  let y = bodyObject.face.pos.y.value();
+
   // 輪郭
-  drawingRound(context, 75, bodyObject.face.pos.x.value(), 25, 25, "#fff");
+  drawingRound(context, x, y, 25, 25, "#fff");
 
   // 右目
-  drawingRound(context, 65, bodyObject.face.pos.x.value(), 5, 10, "#000");
+  drawingRound(context, x - 10, y, 5, 10, "#000");
 
   // 左目
-  drawingRound(context, 85, bodyObject.face.pos.x.value(), 5, 10, "#000");
+  drawingRound(context, x + 10, y, 5, 10, "#000");
 }
 
 /**
