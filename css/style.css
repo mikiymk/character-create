@@ -5,3 +5,7 @@ body {
 canvas {
   background-color: green;
 }
+
+input[type="range"] {
+  width: 500px;
+}
