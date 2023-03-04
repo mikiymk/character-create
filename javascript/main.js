@@ -51,7 +51,7 @@ function createNumberControlElement(name, obs) {
     h("input", {
       type: "range",
       value: obs.value(),
-      oninput: (event) => obs.update(event.target.value),
+      oninput: (event) => obs.update(Number(event.target.value)),
     }),
     t(obs),
   ]);
