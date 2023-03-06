@@ -1,5 +1,8 @@
 "use strict";
 
+const CANVAS_HEIGHT = 500;
+const CANVAS_WIDTH = 500;
+
 /**
  * do this first
  */
@@ -18,7 +21,7 @@ export function main(root) {
  * Canvas要素を作ります
  */
 function createCanvasElement() {
-  return h("canvas", { height: 500, width: 500 });
+  return h("canvas", { height: CANVAS_HEIGHT, width: CANVAS_WIDTH });
 }
 
 const bodyObject = {
@@ -62,7 +65,8 @@ function createNumberControlElement(name, obs) {
  * @param {CanvasRenderingContext2D} context
  */
 function drawingAll(context) {
-  context.clearRect(0, 0, 500, 500);
+  context.clearRect(0, 0, CANVAS_HEIGHT, CANVAS_WIDTH);
+
   drawingFace(context);
 
   requestAnimationFrame(() => drawingAll(context));
